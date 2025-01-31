@@ -28,48 +28,6 @@ namespace mySpace {
             std::cout << "Default Constructor called\n";
         };
 
-        //copy constructor
-        vector<ItemType>(const vector<ItemType>& other) {
-            std::cout << "Copy Constructor called\n";
-            currentCapacity = other.currentCapacity;
-            numItems = other.numItems;
-            theData = new ItemType[other.currentCapacity];
-
-
-            for (size_t i = 0; i < numItems; i++)
-                theData[i] = other.theData[i];
-        }
-
-        void swap(vector<ItemType>& other) {
-            std::swap(numItems, other.numItems);
-            std::swap(currentCapacity, other.currentCapacity);
-            std::swap(theData, other.theData);
-        }
-
-
-        //copy assignment operator
-        vector<ItemType>& operator= (const vector<ItemType>& other) {
-            std::cout << "Copy Assignment Operator called\n";
-            // Make a copy of the other vector.
-            vector<ItemType> the_copy(other);
-            // Swap contents of self with the copy.
-            swap(the_copy);
-            // Return -- upon return the old value will be destroyed.
-            return *this;
-        }
-
-        ~vector<ItemType>() {
-            std::cout << "Destructor called\n";
-            delete[] theData;
-            theData = nullptr;
-        }
-
-
-        const int size() const {
-            // Verify that the index is legal.
-            return numItems;
-        }
-
         const ItemType& operator[](size_t index) const {
             // Verify that the index is legal.
             if (index >= numItems) {
@@ -77,6 +35,11 @@ namespace mySpace {
                 ("index to operator[] is out of range");
             }
             return theData[index];
+        }
+
+        const int size() const {
+            // Verify that the index is legal.
+            return numItems;
         }
 
         void reserve(size_t newCapacity) {
@@ -131,6 +94,45 @@ namespace mySpace {
             //decrease numItems
  
         }
+
+
+        void swap(vector<ItemType>& other) {
+            std::swap(numItems, other.numItems);
+            std::swap(currentCapacity, other.currentCapacity);
+            std::swap(theData, other.theData);
+        }
+
+
+        //copy constructor
+        vector<ItemType>(const vector<ItemType>& other) {
+            std::cout << "Copy Constructor called\n";
+            currentCapacity = other.currentCapacity;
+            numItems = other.numItems;
+            theData = new ItemType[other.currentCapacity];
+
+
+            for (size_t i = 0; i < numItems; i++)
+                theData[i] = other.theData[i];
+        }
+
+
+        //copy assignment operator
+        vector<ItemType>& operator= (const vector<ItemType>& other) {
+            std::cout << "Copy Assignment Operator called\n";
+            // Make a copy of the other vector.
+            vector<ItemType> the_copy(other);
+            // Swap contents of self with the copy.
+            swap(the_copy);
+            // Return -- upon return the old value will be destroyed.
+            return *this;
+        }
+
+        ~vector<ItemType>() {
+            std::cout << "Destructor called\n";
+            delete[] theData;
+            theData = nullptr;
+        }
+
 
 
 
