@@ -21,7 +21,9 @@ int main()
     for (int i = 0; i < 11; i++) {
         myVector.pushBack(std::to_string(i));   // at index 10, the vector will reallocate double the space
     }
-
+    myVector.pushBack("2");
+    myVector.insert(0, "3");
+    myVector.erase(2);
     printVector(myVector);
 
 }

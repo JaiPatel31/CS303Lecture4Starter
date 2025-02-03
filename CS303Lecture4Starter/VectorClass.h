@@ -64,35 +64,50 @@ namespace mySpace {
 
         void pushBack(const ItemType& the_value) {
             // Make sure there is space for the new item.
-
+            if (currentCapacity == numItems) {
+                reserve(currentCapacity + 1);
+            }
             // Insert the new item.
-             
+            theData[numItems] = the_value;
             
             //increase numItems
+            numItems++;
         }
 
 
         void insert(size_t index, const ItemType& the_value) {
             // Validate index.
- 
+            if (index<0 || index > numItems) {
+                std::cerr << "Index is out of range";
+            }
             // Ensure that there is space for the new item.
- 
+            if (numItems == currentCapacity) {
+                reserve(currentCapacity + 1);
+            }
             // Move data from index to numItems - 1 down.
- 
+            int temp;
+            for (int i = index; i < numItems; i++) {
+                temp = theData[i+1];
+                theData[i + 1] = theData[i];
+            }
             // Insert the new item.
-
+            theData[index] = the_value;
 
             //increase numItems
- 
+            numItems++;
         }
 
         void erase(size_t index) {
             // Validate index.
- 
+            if (index < 0 || index > numItems) {
+                std::cerr << "Index is out of range";
+            }
             // Move items below the removed one up.
-
+            for (int i = index; i < numItems - 1; i++) {
+                theData[i] = theData[i + 1];
+            }
             //decrease numItems
- 
+            numItems--;
         }
 
 
